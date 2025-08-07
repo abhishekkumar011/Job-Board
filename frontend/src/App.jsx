@@ -1,9 +1,11 @@
-import React from 'react'
+import HeroSection from "./components/HeroSection";
 
 function App() {
   return (
-    <div>Hello From App</div>
-  )
+    <div>
+      <HeroSection />
+    </div>
+  );
 }
 
-export default App
+export default App;
