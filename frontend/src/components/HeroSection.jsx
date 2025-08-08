@@ -27,10 +27,7 @@ function HeroSection() {
           <Briefcase className="w-5 h-5" />
           Browse Jobs
         </Button>
-        <Button
-          variant="outline"
-          className="border-white/50 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm cursor-pointer"
-        >
+        <Button className="bg-white/10 border border-white/20 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm cursor-pointer">
           <Plus className="w-5 h-5" />
           Post a Job
         </Button>
