@@ -42,7 +42,7 @@ function HeroSection({ onCreate }) {
               Post a Job
             </Button>
           </DialogTrigger>
-          <DialogContent className="min-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="md:min-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-center text-2xl text-blue-700 font-bold">
                 Post New Job
