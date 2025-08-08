@@ -8,7 +8,7 @@ import {
 
 const router = Router();
 
-router.route("/createjob").post(createJob);
+router.route("/").post(createJob);
 router.route("/").get(getJobs);
 router.route("/:id").delete(deleteJob);
 router.route("/:id").put(updateJob);
