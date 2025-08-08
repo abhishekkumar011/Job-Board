@@ -1,6 +1,14 @@
 import React from "react";
 import { Briefcase, Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
+import JobForm from "./JobForm";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 function HeroSection() {
   return (
@@ -27,10 +35,23 @@ function HeroSection() {
           <Briefcase className="w-5 h-5" />
           Browse Jobs
         </Button>
-        <Button className="bg-white/10 border border-white/20 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm cursor-pointer">
-          <Plus className="w-5 h-5" />
-          Post a Job
-        </Button>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="bg-white/10 border border-white/20 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-2xl backdrop-blur-sm cursor-pointer">
+              <Plus className="w-5 h-5" />
+              Post a Job
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="min-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-center text-2xl text-blue-700 font-bold">
+                Post New Job
+              </DialogTitle>
+            </DialogHeader>
+            <JobForm />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-20 max-w-4xl mt-10">
