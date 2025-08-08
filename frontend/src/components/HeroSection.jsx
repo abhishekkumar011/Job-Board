@@ -1,4 +1,3 @@
-import React from "react";
 import { Briefcase, Plus, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import JobForm from "./JobForm";
@@ -10,7 +9,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-function HeroSection() {
+function HeroSection({ onCreate }) {
   return (
     <div className="py-10 lg:pt-0 px-5 min-h-screen flex flex-col gap-10 items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
       <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium border border-white/20">
@@ -49,7 +48,7 @@ function HeroSection() {
                 Post New Job
               </DialogTitle>
             </DialogHeader>
-            <JobForm />
+            <JobForm onSubmit={onCreate} />
           </DialogContent>
         </Dialog>
       </div>

@@ -12,14 +12,14 @@ import {
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 
-function JobForm() {
+function JobForm({ onSubmit, initialData = {} }) {
   const [formData, setFormData] = useState({
-    title: "",
-    company: "",
-    location: "",
-    type: "",
-    salary: "",
-    requirements: "",
+    title: initialData.title || "",
+    company: initialData.company || "",
+    location: initialData.location || "",
+    type: initialData.type || "",
+    salary: initialData.salary || "",
+    requirements: initialData.requirements || "",
   });
 
   const handleChange = (e) => {
@@ -30,10 +30,46 @@ function JobForm() {
     setFormData({ ...formData, type: value });
   };
 
+  const [errors, setErrors] = useState({});
+
+  const formValidation = () => {
+    let newError = {};
+
+    if (!formData.title.trim()) newError.title = "Title is required";
+    if (!formData.company.trim()) newError.company = "Company name is required";
+    if (!formData.location.trim()) newError.location = "location is required";
+    if (!formData.type.trim()) newError.type = "Job type is required";
+    if (!formData.salary.trim()) newError.salary = "salary is required";
+    if (!formData.requirements.trim())
+      newError.requirements = "Requirements is required";
+
+    setErrors(newError);
+
+    return Object.keys(newError).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formValidation()) {
+      onSubmit(formData);
+      setFormData({
+        title: "",
+        company: "",
+        location: "",
+        type: "",
+        salary: "",
+        requirements: "",
+      });
+    } else {
+      console.log("All fields are required");
+    }
+  };
+
   return (
     <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-gray-100">
       <CardContent className="p-8">
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label
@@ -49,6 +85,9 @@ function JobForm() {
                 placeholder="e.g. Frontend Developer"
                 className={`h-12 border-2 rounded-xl transition-all duration-200`}
               />
+              {errors.title && (
+                <p className="text-red-500 text-sm">{errors.title}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -65,6 +104,9 @@ function JobForm() {
                 placeholder="e.g. Creuto"
                 className={`h-12 border-2 rounded-xl transition-all duration-200`}
               />
+              {errors.company && (
+                <p className="text-red-500 text-sm">{errors.company}</p>
+              )}
             </div>
           </div>
 
@@ -83,6 +125,9 @@ function JobForm() {
                 placeholder="e.g. India"
                 className={`h-12 border-2 rounded-xl transition-all duration-200 `}
               />
+              {errors.location && (
+                <p className="text-red-500 text-sm">{errors.location}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -93,24 +138,21 @@ function JobForm() {
                 Job Type
               </Label>
               <Select value={formData.type} onValueChange={handleSeletChange}>
-                <SelectTrigger className="w-full min-h-fit border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-blue-200">
+                <SelectTrigger className="w-full min-h-12 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-blue-200">
                   <SelectValue placeholder="Select job type" />
                 </SelectTrigger>
                 <SelectContent className="rounded-xl border-2">
-                  <SelectItem value="Full-time" className="rounded-lg">
-                    Full-time
+                  <SelectItem value="fulltime" className="rounded-lg">
+                    Full-Time
                   </SelectItem>
-                  <SelectItem value="Part-time" className="rounded-lg">
-                    Part-time
-                  </SelectItem>
-                  <SelectItem value="Contract" className="rounded-lg">
-                    Contract
-                  </SelectItem>
-                  <SelectItem value="Remote" className="rounded-lg">
-                    Remote
+                  <SelectItem value="Internship" className="rounded-lg">
+                    Internship
                   </SelectItem>
                 </SelectContent>
               </Select>
+              {errors.type && (
+                <p className="text-red-500 text-sm">{errors.type}</p>
+              )}
             </div>
           </div>
 
@@ -128,6 +170,9 @@ function JobForm() {
               placeholder="e.g. 10 LPA"
               className={`h-12 border-2 rounded-xl transition-all duration-200`}
             />
+            {errors.salary && (
+              <p className="text-red-500 text-sm">{errors.salary}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -145,6 +190,9 @@ function JobForm() {
               rows={5}
               className={`border-2 rounded-xl transition-all duration-200 resize-none `}
             />
+            {errors.requirements && (
+              <p className="text-red-500 text-sm">{errors.requirements}</p>
+            )}
           </div>
 
           <div className="flex gap-4 pt-6">
